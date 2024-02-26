@@ -58,7 +58,10 @@ export const signin = async (req, res, next) => {
 
     res
       .status(200)
-      .cookie('access_token', token,{httpOnly: true})
+      .cookie('access_token', token,{sameSite : "none",
+      secure: true,
+      domain: "https://gorgeous-yak-leg-warmers.cyclic.app",
+      httpOnly: true})
       .json(rest);
   } catch (error) {
     next(error);

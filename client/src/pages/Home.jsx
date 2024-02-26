@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
 import NewsSection from '../components-new/NewsItems';
 import CarouselSection from '../components-new/Carousel';
+import customFetch from '../api';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
     // Step 1: Group posts by category
-    const groupedPosts = posts.reduce((acc, post) => {
+    const groupedPosts = posts?.reduce((acc, post) => {
       // If the category is not yet a key in the accumulator, add it
       if (!acc[post.category]) {
         acc[post.category] = [];
@@ -22,7 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('/api/post/getPosts');
+      const res = await customFetch('/api/post/getPosts');
       const data = await res.json();
       setPosts(data.posts);
     };

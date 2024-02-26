@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import customFetch from '../api';
 
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ export default function CommentSection({ postId }) {
       return;
     }
     try {
-      const res = await fetch('/api/comment/create', {
+      const res = await customFetch('/api/comment/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ export default function CommentSection({ postId }) {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const res = await fetch(`/api/comment/getPostComments/${postId}`);
+        const res = await customFetch(`/api/comment/getPostComments/${postId}`);
         if (res.ok) {
           const data = await res.json();
           setComments(data);
@@ -62,7 +63,7 @@ export default function CommentSection({ postId }) {
         navigate('/sign-in');
         return;
       }
-      const res = await fetch(`/api/comment/likeComment/${commentId}`, {
+      const res = await customFetch(`/api/comment/likeComment/${commentId}`, {
         method: 'PUT',
       });
       if (res.ok) {
@@ -99,7 +100,7 @@ export default function CommentSection({ postId }) {
         navigate('/sign-in');
         return;
       }
-      const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
+      const res = await customFetch(`/api/comment/deleteComment/${commentId}`, {
         method: 'DELETE',
       });
       if (res.ok) {

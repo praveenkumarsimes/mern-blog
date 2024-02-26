@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
 import { useEffect, useState } from 'react';
-// import logo from '../../dist/assets/logo.png';
+import customFetch from '../api';
+import logo from '../../images/logo.png';
 
 export default function Header() {
   const path = useLocation().pathname;
@@ -27,7 +28,7 @@ export default function Header() {
 
   const handleSignout = async () => {
     try {
-      const res = await fetch('/api/user/signout', {
+      const res = await customFetch('/api/user/signout', {
         method: 'POST',
       });
       const data = await res.json();
@@ -55,11 +56,11 @@ export default function Header() {
         to='/'
         className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
       >
-        {/* <img src={logo}/> */}
-        <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
+        <img src={logo} height={'60px'}/>
+        {/* <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
           THAAI MEERA
         </span>
-         TRUST
+         TRUST */}
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput

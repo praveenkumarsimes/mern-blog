@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { set } from 'mongoose';
+import customFetch from '../api';
 
 export default function DashSlider() {
   const { currentUser } = useSelector((state) => state.user);
@@ -15,7 +16,7 @@ export default function DashSlider() {
 
    useEffect(()=>{
     const getSliderImage=async()=>{
-      const res = await fetch('/api/post/getSlider');
+      const res = await customFetch('/api/post/getSlider');
       const data = await res.json();
        if(res.ok){
         setImages(data?.slider[0]?.sliderImages);
@@ -47,7 +48,7 @@ export default function DashSlider() {
   const handleDeletePost = async () => {
     setShowModal(false);
     try {
-      const res = await fetch(
+      const res = await customFetch(
         `/api/post/deleteImage/${currentUser._id}/${postIdToDelete}`,
         {
             method: 'delete'

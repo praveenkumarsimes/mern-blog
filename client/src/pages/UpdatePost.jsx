@@ -13,6 +13,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import customFetch from '../api';
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
@@ -27,7 +28,7 @@ export default function UpdatePost() {
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`/api/post/getposts?postId=${postId}`);
+        const res = await customFetch(`/api/post/getposts?postId=${postId}`);
         const data = await res.json();
         if (!res.ok) {
           console.log(data.message);
@@ -85,7 +86,7 @@ export default function UpdatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/post/updatepost/${postId}/${currentUser._id}`, {
+      const res = await customFetch(`/api/post/updatepost/${postId}/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

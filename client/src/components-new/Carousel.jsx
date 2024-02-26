@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import customFetch from '../api';
 
 const CarouselSection = () => {
   const [images,setImages]=useState("")
@@ -29,8 +30,8 @@ const CarouselSection = () => {
 
   useEffect(()=>{
     const getSliderImage=async()=>{
-      const res = await fetch('/api/post/getSlider');
-      const data = await res.json();
+      const res = await customFetch('/api/post/getSlider');
+      const data = await res?.json();
        if(res.ok){
         setImages(data?.slider[0]?.sliderImages)
         // setImages(data?.slider[0]?.sliderImages);

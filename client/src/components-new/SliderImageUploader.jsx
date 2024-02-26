@@ -4,6 +4,7 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RiChatDeleteFill } from "react-icons/ri";
+import customFetch from '../api';
 
 const SliderImageUploader = () => {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -49,7 +50,7 @@ const SliderImageUploader = () => {
     let sliderImages = sliderImage;
     console.log(sliderImages)
     try {
-      const res = await fetch(`/api/post/createSlider/${currentUser?._id}`, {
+      const res = await customFetch(`/api/post/createSlider/${currentUser?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

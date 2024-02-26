@@ -74,6 +74,7 @@ export const google = async (req, res, next) => {
         { id: user._id, isAdmin: user.isAdmin },
         process.env.JWT_SECRET
       );
+      console.log("token",token);
       const { password, ...rest } = user._doc;
       res
         .status(200)

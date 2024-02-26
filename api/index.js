@@ -28,12 +28,16 @@ dBConnection().then(() => {
 });
 
 // const __dirname = path.resolve();
+const corsOptions = {
+  origin: 'https://www.thaimeera.com', // Specify the origin you want to allow requests from
+  credentials: true, // Allow cookies and authentication data to be sent
+};
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 // Increase the payload limit
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));

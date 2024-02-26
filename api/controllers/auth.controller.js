@@ -101,7 +101,14 @@ export const google = async (req, res, next) => {
       const { password, ...rest } = newUser._doc;
       res
         .status(200)
-        .cookie('access_token', token)
+        .cookie('access_token', token,{
+       httpOnly: true, // Prevents client-side JS from accessing the cookie
+       secure: true, // Ensures cookie is sent over HTTPS
+       sameSite: 'None', // Important for cross-site access if your API is called from another domain
+       domain: 'https://www.thaimeera.com/', // Set to your domain
+       path: '/', // Default path
+       maxAge: 3600000 // Expires in 1 hour
+        })
         .json(rest);
     }
   } catch (error) {

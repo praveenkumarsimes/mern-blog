@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
 import { useEffect, useState } from 'react';
-import logo from '../../dist/assets/logo.png';
+// import logo from '../../dist/assets/logo.png';
 
 export default function Header() {
   const path = useLocation().pathname;

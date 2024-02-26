@@ -19,15 +19,6 @@ const dBConnection =async()=>{
 console.log("DB connect to :"+ conn.connection.host)
 }
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 
 dBConnection().then(() => {
   app.listen(3000, () => {
@@ -43,7 +34,7 @@ dBConnection().then(() => {
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({credentials: true, origin: true}));
+app.use(cors({credentials: true, origin: "https://gorgeous-yak-leg-warmers.cyclic.app"}));
 // Increase the payload limit
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));

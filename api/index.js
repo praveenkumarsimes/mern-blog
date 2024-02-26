@@ -32,7 +32,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "https://www.thaimeera.com", exposedHeaders: ["Set-Cookie"] }));
+app.use(cors({credentials: true, origin: true}));
 // Increase the payload limit
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));

@@ -12,18 +12,20 @@ import bodyParser from 'body-parser';
 
 dotenv.config();
 
+mongoose.set('strictQuery',false);
 const dBConnection =async()=>{
- await mongoose
-  .connect("mongodb+srv://user123:XyLkuCWFErDM8MLj@cluster0.f8eue.mongodb.net/?retryWrites=true&w=majority")
-  .then(() => {
-    console.log('MongoDb is connected');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+ const conn = await mongoose.connect(process.env.MONGO_URI)
+console.log("DB connect to :"+ conn.connection.host)
 }
 
-dBConnection();
+dBConnection().then(() => {
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000!');
+  });
+})
+.catch((err) => {
+  console.log(err);
+});
 
 // const __dirname = path.resolve();
 
@@ -36,9 +38,7 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
-});
+
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);

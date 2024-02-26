@@ -8,8 +8,11 @@ import commentRoutes from './routes/comment.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 
 dotenv.config();
+
+
 
 mongoose
   .connect(process.env.MONGO)
@@ -27,6 +30,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+// Increase the payload limit
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');

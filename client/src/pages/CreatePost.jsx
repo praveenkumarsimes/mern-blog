@@ -103,9 +103,9 @@ export default function CreatePost() {
             }
           >
             <option value='uncategorized'>Select a category</option>
-            <option value='javascript'>JavaScript</option>
-            <option value='reactjs'>React.js</option>
-            <option value='nextjs'>Next.js</option>
+            <option value='FEATURED POST'>FEATURED POST</option>
+            <option value='LATEST POST'>LATEST POST</option>
+            <option value='TRENDING POST'>TRENDING POST</option>
           </Select>
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
@@ -163,3 +163,19 @@ export default function CreatePost() {
     </div>
   );
 }
+
+
+
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+// service firebase.storage {
+//   match /b/{bucket}/o {
+//     match /{allPaths=**} {
+//       allow read ; 
+//       allow write: if 
+//       request.resource.size < 2 * 1024 * 1024 &&
+//       request.resource.contentType.matches('image/.*')
+//     }
+//   }
+// }

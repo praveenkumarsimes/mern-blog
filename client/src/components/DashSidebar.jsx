@@ -3,6 +3,7 @@ import {
   HiUser,
   HiArrowSmRight,
   HiDocumentText,
+  HiDocumentAdd ,
   HiOutlineUserGroup,
   HiAnnotation,
   HiChartPie,
@@ -77,6 +78,17 @@ export default function DashSidebar() {
               </Sidebar.Item>
             </Link>
           )}
+         {currentUser.isAdmin && (
+            <Link to='/dashboard?tab=slider'>
+              <Sidebar.Item
+                active={tab === 'slider'}
+                icon={HiDocumentAdd}
+                as='div'
+              >
+                Slider Image
+              </Sidebar.Item>
+            </Link>
+          )}
           {currentUser.isAdmin && (
             <>
               <Link to='/dashboard?tab=users'>
@@ -99,6 +111,7 @@ export default function DashSidebar() {
               </Link>
             </>
           )}
+          
           <Sidebar.Item
             icon={HiArrowSmRight}
             className='cursor-pointer'

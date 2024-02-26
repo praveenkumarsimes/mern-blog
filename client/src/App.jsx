@@ -14,6 +14,7 @@ import UpdatePost from './pages/UpdatePost';
 import PostPage from './pages/PostPage';
 import ScrollToTop from './components/ScrollToTop';
 import Search from './pages/Search';
+import SliderImageUploader from './components-new/SliderImageUploader';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         </Route>
         <Route element={<OnlyAdminPrivateRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/slider-image' element={<SliderImageUploader/>}/>
           <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
 

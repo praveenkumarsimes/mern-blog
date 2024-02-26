@@ -242,6 +242,7 @@ export default function DashProfile() {
           {loading ? 'Loading...' : 'Update'}
         </Button>
         {currentUser.isAdmin && (
+          <>
           <Link to={'/create-post'}>
             <Button
               type='button'
@@ -251,6 +252,17 @@ export default function DashProfile() {
               Create a post
             </Button>
           </Link>
+
+          <Link to={'/slider-image'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Slider Image Upload
+            </Button>
+          </Link>
+          </>
         )}
       </form>
       <div className='text-red-500 flex justify-between mt-5'>

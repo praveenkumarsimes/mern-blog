@@ -1,10 +1,24 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import CallToAction from '../components/CallToAction';
 import { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
+import NewsSection from '../components-new/NewsItems';
+import CarouselSection from '../components-new/Carousel';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+
+    // Step 1: Group posts by category
+    const groupedPosts = posts.reduce((acc, post) => {
+      // If the category is not yet a key in the accumulator, add it
+      if (!acc[post.category]) {
+        acc[post.category] = [];
+      }
+      // Push the current post to its category array
+      acc[post.category].push(post);
+      return acc;
+    }, {});
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,6 +30,7 @@ export default function Home() {
   }, []);
   return (
     <div>
+      <CarouselSection/>
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
         <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to my Blog</h1>
         <p className='text-gray-500 text-xs sm:text-sm'>
@@ -36,12 +51,17 @@ export default function Home() {
       <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7'>
         {posts && posts.length > 0 && (
           <div className='flex flex-col gap-6'>
-            <h2 className='text-2xl font-semibold text-center'>Recent Posts</h2>
-            <div className='flex flex-wrap gap-4'>
-              {posts.map((post) => (
-                <PostCard key={post._id} post={post} />
-              ))}
-            </div>
+            
+            {Object.entries(groupedPosts).map(([category, posts]) => (
+        <React.Fragment key={category}>
+          <h2 className='text-2xl font-semibold text-center'>{category}</h2>
+          <div className='flex flex-wrap gap-4'>
+            {posts.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </div>
+        </React.Fragment>
+      ))}
             <Link
               to={'/search'}
               className='text-lg text-teal-500 hover:underline text-center'
@@ -51,6 +71,8 @@ export default function Home() {
           </div>
         )}
       </div>
+      {/* <h2 className='text-2xl font-semibold text-center'>Trending Posts</h2>
+      <NewsSection/> */}
     </div>
   );
 }

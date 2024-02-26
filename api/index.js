@@ -14,7 +14,7 @@ dotenv.config();
 
 const dBConnection =async()=>{
  await mongoose
-  .connect("mongodb+srv://user123:XyLkuCWFErDM8MLj@cluster0.f8eue.mongodb.net/?retryWrites=true&w=majority")
+  .connect("mongodb+srv://manikandansitpl3:83mb1dmaopS%40@mobilecluster0.nkmpjqj.mongodb.net/?retryWrites=true&w=majority")
   .then(() => {
     console.log('MongoDb is connected');
   })

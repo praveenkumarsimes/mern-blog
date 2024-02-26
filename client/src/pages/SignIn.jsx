@@ -28,6 +28,7 @@ export default function SignIn() {
       const res = await customFetch('/api/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
         body: JSON.stringify(formData),
       });
       const data = await res.json();

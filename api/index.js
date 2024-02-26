@@ -12,18 +12,20 @@ import bodyParser from 'body-parser';
 
 dotenv.config();
 
-
-
-mongoose
-  .connect("mongodb+srv://user123:XyLkuCWFErDM8MLj@cluster0.f8eue.mongodb.net/?retryWrites=true&w=majority")
+const dBConnection =async()=>{
+ await mongoose
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDb is connected');
   })
   .catch((err) => {
     console.log(err);
   });
+}
 
-const __dirname = path.resolve();
+dBConnection();
+
+// const __dirname = path.resolve();
 
 const app = express();
 

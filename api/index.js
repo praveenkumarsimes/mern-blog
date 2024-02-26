@@ -34,7 +34,7 @@ dBConnection().then(() => {
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({credentials: true, origin: "https://gorgeous-yak-leg-warmers.cyclic.app"}));
+app.use(cors({credentials: true, origin:true}));
 // Increase the payload limit
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));

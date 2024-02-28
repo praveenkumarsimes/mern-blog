@@ -53,18 +53,13 @@ export const signin = async (req, res, next) => {
       { id: validUser._id, isAdmin: validUser.isAdmin },
       process.env.JWT_SECRET
     );
-
+    
     const { password: pass, ...rest } = validUser._doc;
 
     res
       .status(200)
-      res.cookie('access_token', token, {
-        httpOnly: true, // Protects against XSS attacks by not allowing JS access
-        secure: true, // Ensures the cookie is only sent over HTTPS
-        sameSite: 'lax', // Controls when cookies are sent with cross-site requests
-        maxAge: 3600000, // Example: 1 hour cookie expiration
-      })
-      .json(rest);
+      res.cookie('access_token', token)
+      .json({rest,token});
   } catch (error) {
     next(error);
   }
@@ -79,17 +74,11 @@ export const google = async (req, res, next) => {
         { id: user._id, isAdmin: user.isAdmin },
         process.env.JWT_SECRET
       );
-      console.log("token",token);
       const { password, ...rest } = user._doc;
       res
         .status(200)
-        res.cookie('access_token', token, {
-          httpOnly: true, // Protects against XSS attacks by not allowing JS access
-          secure: true, // Ensures the cookie is only sent over HTTPS
-          sameSite: 'lax', // Controls when cookies are sent with cross-site requests
-          maxAge: 3600000, // Example: 1 hour cookie expiration
-        })
-        .json(rest);
+        res.cookie('access_token', token)
+        .json({rest,token});
     } else {
       const generatedPassword =
         Math.random().toString(36).slice(-8) +
@@ -111,13 +100,8 @@ export const google = async (req, res, next) => {
       const { password, ...rest } = newUser._doc;
       res
         .status(200)
-        res.cookie('access_token', token, {
-          httpOnly: true, // Protects against XSS attacks by not allowing JS access
-          secure: true, // Ensures the cookie is only sent over HTTPS
-          sameSite: 'lax', // Controls when cookies are sent with cross-site requests
-          maxAge: 3600000, // Example: 1 hour cookie expiration
-        })
-        .json(rest);
+        res.cookie('access_token', token)
+        .json({rest,token});
     }
   } catch (error) {
     next(error);

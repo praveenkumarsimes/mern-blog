@@ -9,10 +9,12 @@ import {
 } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error: errorMessage } = useSelector((state) => state.user);
+  const {setAuthToken} = AuthState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -37,7 +39,10 @@ export default function SignIn() {
       }
 
       if (res.ok) {
-        dispatch(signInSuccess(data));
+        dispatch(signInSuccess(data.rest));
+        setAuthToken(data.token)
+        let stringy = JSON.stringify(data.token)
+        localStorage.setItem('token',stringy)
         navigate('/');
       }
     } catch (error) {

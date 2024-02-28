@@ -30,14 +30,10 @@ dBConnection().then(() => {
 });
 
 
-const corsOptions = {
-  origin: 'https://thaimeera.com', // Replace with your frontend domain
-  credentials: true, // Allows cookies to be sent from the frontend
-};
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors(corsOptions));
+app.use(cors());
 // Increase the payload limit
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RiChatDeleteFill } from "react-icons/ri";
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 const SliderImageUploader = () => {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -12,6 +13,7 @@ const SliderImageUploader = () => {
   const [File, setFile] = useState("");
   const [sliderImage, setsliderImage] = useState([]);
   const [publishError, setPublishError] = useState(null);
+  const {authToken}= AuthState();
   const navigate = useNavigate();
 
   const handleUpdloadImage = async () => {
@@ -54,6 +56,7 @@ const SliderImageUploader = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify(sliderImages),
       });

@@ -6,11 +6,13 @@ import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function OAuth() {
     const auth = getAuth(app)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {setAuthToken} = AuthState()
     const handleGoogleClick = async () =>{
         const provider = new GoogleAuthProvider()
         provider.setCustomParameters({ prompt: 'select_account' })
@@ -27,7 +29,10 @@ export default function OAuth() {
                 })
             const data = await res.json()
             if (res.ok){
-                dispatch(signInSuccess(data))
+                setAuthToken(data.token)
+                let stringy = JSON.stringify(data.token)
+                localStorage.setItem('token',stringy)
+                dispatch(signInSuccess(data.rest))
                 navigate('/')
             }
         } catch (error) {

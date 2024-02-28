@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
+  const {authToken} = AuthState();
   const [comment, setComment] = useState('');
   const [commentError, setCommentError] = useState(null);
   const [comments, setComments] = useState([]);
@@ -24,6 +26,7 @@ export default function CommentSection({ postId }) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify({
           content: comment,

@@ -13,6 +13,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function CreatePost() {
   const [file, setFile] = useState(null);
@@ -20,6 +21,7 @@ export default function CreatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  const {authToken} = AuthState();
 
   const navigate = useNavigate();
 
@@ -66,6 +68,7 @@ export default function CreatePost() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify(formData),
       });

@@ -35,6 +35,7 @@ export default function DashSidebar() {
       if (!res.ok) {
         console.log(data.message);
       } else {
+        localStorage.removeItem('token');
         dispatch(signoutSuccess());
       }
     } catch (error) {

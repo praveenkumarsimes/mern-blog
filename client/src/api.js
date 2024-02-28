@@ -1,5 +1,6 @@
 // src/api.js
 
+// const BASE_URL = 'http://localhost:3000'; // Your base URL from the Vite proxy configuration
 const BASE_URL = 'https://gorgeous-yak-leg-warmers.cyclic.app'; // Your base URL from the Vite proxy configuration
 
 const customFetch = (endpoint, options = {}) => {

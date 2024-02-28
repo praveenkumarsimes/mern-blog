@@ -58,9 +58,12 @@ export const signin = async (req, res, next) => {
 
     res
       .status(200)
-      .cookie('access_token', token,{sameSite : "none",
-      secure: true,
-      httpOnly: true})
+      res.cookie('access_token', token, {
+        httpOnly: true, // Protects against XSS attacks by not allowing JS access
+        secure: true, // Ensures the cookie is only sent over HTTPS
+        sameSite: 'lax', // Controls when cookies are sent with cross-site requests
+        maxAge: 3600000, // Example: 1 hour cookie expiration
+      })
       .json(rest);
   } catch (error) {
     next(error);
@@ -80,7 +83,12 @@ export const google = async (req, res, next) => {
       const { password, ...rest } = user._doc;
       res
         .status(200)
-        .cookie('access_token', token)
+        res.cookie('access_token', token, {
+          httpOnly: true, // Protects against XSS attacks by not allowing JS access
+          secure: true, // Ensures the cookie is only sent over HTTPS
+          sameSite: 'lax', // Controls when cookies are sent with cross-site requests
+          maxAge: 3600000, // Example: 1 hour cookie expiration
+        })
         .json(rest);
     } else {
       const generatedPassword =
@@ -103,7 +111,12 @@ export const google = async (req, res, next) => {
       const { password, ...rest } = newUser._doc;
       res
         .status(200)
-        .cookie("access_token", token, { domain: 'https://www.thaimeera.com/' })
+        res.cookie('access_token', token, {
+          httpOnly: true, // Protects against XSS attacks by not allowing JS access
+          secure: true, // Ensures the cookie is only sent over HTTPS
+          sameSite: 'lax', // Controls when cookies are sent with cross-site requests
+          maxAge: 3600000, // Example: 1 hour cookie expiration
+        })
         .json(rest);
     }
   } catch (error) {

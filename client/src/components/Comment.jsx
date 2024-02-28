@@ -5,12 +5,14 @@ import { useSelector } from 'react-redux';
 import { Button, Textarea } from 'flowbite-react';
 import { set } from 'mongoose';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function Comment({ comment, onLike, onEdit, onDelete }) {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment.content);
   const { currentUser } = useSelector((state) => state.user);
+  const {authToken} = AuthState()
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -37,6 +39,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify({
           content: editedContent,

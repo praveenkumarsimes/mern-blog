@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function DashComments() {
   const { currentUser } = useSelector((state) => state.user);
@@ -11,6 +12,7 @@ export default function DashComments() {
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [commentIdToDelete, setCommentIdToDelete] = useState('');
+  const {authToken} = AuthState();
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -56,6 +58,10 @@ export default function DashComments() {
         `/api/comment/deleteComment/${commentIdToDelete}`,
         {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
         }
       );
       const data = await res.json();

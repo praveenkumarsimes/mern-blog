@@ -14,6 +14,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
@@ -22,6 +23,7 @@ export default function UpdatePost() {
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();
+  const {authToken} = AuthState();
   const navigate = useNavigate();
     const { currentUser } = useSelector((state) => state.user);
 
@@ -90,6 +92,7 @@ export default function UpdatePost() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify(formData),
       });

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function DashUsers() {
   const { currentUser } = useSelector((state) => state.user);
@@ -11,6 +12,7 @@ export default function DashUsers() {
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState('');
+  const {authToken}= AuthState()
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -51,6 +53,10 @@ export default function DashUsers() {
     try {
         const res = await customFetch(`/api/user/delete/${userIdToDelete}`, {
             method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${authToken}`
+            },
         });
         const data = await res.json();
         if (res.ok) {

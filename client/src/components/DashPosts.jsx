@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { set } from 'mongoose';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
@@ -12,6 +13,7 @@ export default function DashPosts() {
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
+  const {authToken}=AuthState();
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -57,6 +59,10 @@ export default function DashPosts() {
         `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
         {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
         }
       );
       const data = await res.json();

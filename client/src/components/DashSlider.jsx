@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { set } from 'mongoose';
 import customFetch from '../api';
+import { AuthState } from '../context/AuthContext';
 
 export default function DashSlider() {
   const { currentUser } = useSelector((state) => state.user);
@@ -13,6 +14,7 @@ export default function DashSlider() {
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
   const [Images,setImages] = useState('');
+  const {authToken} = AuthState()
 
    useEffect(()=>{
     const getSliderImage=async()=>{
@@ -51,7 +53,11 @@ export default function DashSlider() {
       const res = await customFetch(
         `/api/post/deleteImage/${currentUser._id}/${postIdToDelete}`,
         {
-            method: 'delete'
+            method: 'delete',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${authToken}`
+            },
           }
       );
       const data = await res.json();

@@ -68,6 +68,10 @@ export default function CommentSection({ postId }) {
       }
       const res = await customFetch(`/api/comment/likeComment/${commentId}`, {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
       });
       if (res.ok) {
         const data = await res.json();
@@ -105,6 +109,10 @@ export default function CommentSection({ postId }) {
       }
       const res = await customFetch(`/api/comment/deleteComment/${commentId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
       });
       if (res.ok) {
         const data = await res.json();

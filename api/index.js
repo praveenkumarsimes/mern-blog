@@ -31,7 +31,7 @@ dBConnection().then(() => {
 
 
 const corsOptions = {
-  origin: 'https://thaimeera.com', // Replace with your frontend domain
+  origin: 'https://www.thaimeera.com', // Replace with your frontend domain
   credentials: true, // Allows cookies to be sent from the frontend
 };
 

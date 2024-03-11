@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CallToAction from '../components/CallToAction';
 import { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
-import NewsSection from '../components-new/NewsItems';
+// import NewsSection from '../components-new/NewsItems';
 import CarouselSection from '../components-new/Carousel';
 import customFetch from '../api';
 
@@ -32,19 +32,27 @@ export default function Home() {
   return (
     <div>
       <CarouselSection/>
-      <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
-        <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to my Blog</h1>
-        <p className='text-gray-500 text-xs sm:text-sm'>
-          Here you'll find a variety of articles and tutorials on topics such as
-          web development, software engineering, and programming languages.
-        </p>
+      <div className='flex flex-col gap-6 p-8 px-3 max-w-6xl mx-auto '>
+        <h3 className='text-3xl font-bold lg:text-4xl text-white dark:text-blue-700'>Welcome to </h3>
+        <h1 className='text-3xl font-bold lg:text-6xl light:text-black-900 dark:text-yellow-400'> THAI MEERA TRUST</h1>
+        <p className='light:text-black-900 dark:text-black text-2x1'>
+        Title: <br /> 
+        Thai Meera Trust: Illuminating Lives Through Compassion and Care  <br></br>
+        Empowering Women and Widows: A Beacon of Hope in Acts of Compassion    <br></br>
+        Empowering Women and Widows: A Beacon of Hope in Acts of Compassion  </p>
         <Link
           to='/search'
           className='text-xs sm:text-sm text-teal-500 font-bold hover:underline'
         >
           View all posts
         </Link>
+        <div style={{ overflow: 'hidden', whiteSpace: 'nowrap', backgroundColor: '#f0f0f0' }}>
+  <marquee behavior="scroll" scrollamount="9" direction="left" style={{ fontSize: '16px', color: '#007bff', fontWeight: 'bold' }}>
+    Ungalai Anbudan Varaverpahu Thaii Meera Trust
+  </marquee>
+</div>
       </div>
+      
       <div className='p-3 bg-amber-100 dark:bg-slate-700'>
         <CallToAction />
       </div>
@@ -55,7 +63,7 @@ export default function Home() {
             
             {Object.entries(groupedPosts).map(([category, posts]) => (
         <React.Fragment key={category}>
-          <h2 className='text-2xl font-semibold text-center'>{category}</h2>
+          <h2 className='text-2xl font-semibold text-center text-black'>{category}</h2>
           <div className='flex flex-wrap gap-4'>
             {posts.map((post) => (
               <PostCard key={post._id} post={post} />
@@ -72,6 +80,7 @@ export default function Home() {
           </div>
         )}
       </div>
+
       {/* <h2 className='text-2xl font-semibold text-center'>Trending Posts</h2>
       <NewsSection/> */}
     </div>

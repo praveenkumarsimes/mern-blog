@@ -134,7 +134,7 @@ export default function UpdatePost() {
           >
             <option value='uncategorized'>Select a category</option>
             <option value='FEATURED POST'>FEATURED POST</option>
-            <option value='LATEST POST'>LATEST POST</option>
+            <option value='LATEST POST' >LATEST POST</option>
             <option value='TRENDING POST'>TRENDING POST</option>
           </Select>
         </div>

@@ -1,0 +1,26 @@
+/* OurStory.css */
+.container {
+    padding: 50px;
+    font-family: 'Arial, sans-serif';
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    color: #007bff;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .content {
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .sectionTitle {
+    color: #28a745;
+    font-size: 2.2em;
+    margin-bottom: 15px;
+  }
+  

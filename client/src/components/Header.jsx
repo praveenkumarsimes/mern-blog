@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -5,7 +6,6 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
-import { useEffect, useState } from 'react';
 import customFetch from '../api';
 import logo from '../../images/logo.png';
 
@@ -52,18 +52,14 @@ export default function Header() {
   };
 
   return (
-    <Navbar className='border-b-2'>
+    <Navbar className='border-b-' style={{height:"auto",background:"#367d83", padding:"1px"}}>
       <Link
         to='/'
         className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
       >
-        <img src={logo} height={'60px'}/>
-        {/* <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-          THAAI MEERA
-        </span>
-         TRUST */}
+        <img src={logo} alt='Logo' style={{height:"75px"}}/>
       </Link>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <TextInput
           type='text'
           placeholder='Search...'
@@ -72,26 +68,24 @@ export default function Header() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </form>
+      </form> */}
       <Button className='w-12 h-10 lg:hidden' color='gray' pill>
         <AiOutlineSearch />
       </Button>
       <div className='flex gap-2 md:order-2'>
         <Button
-          className='w-12 h-10 hidden sm:inline'
-          color='gray'
-          pill
-          onClick={() => dispatch(toggleTheme())}
-        >
-          {theme === 'light' ? <FaSun /> : <FaMoon />}
+        className='w-12 h-10 hidden sm:inline'
+        color='gray'
+        pill
+        onClick={() => dispatch(toggleTheme())} >
+        {theme === 'light' ? <FaSun /> : <FaMoon />}
         </Button>
         {currentUser ? (
           <Dropdown
             arrowIcon={false}
             inline
-            label={
-              <Avatar alt='user' img={currentUser.profilePicture} rounded />
-            }
+            label={<Avatar alt='user' img={currentUser.profilePicture} rounded />}
+            style={{ minWidth: '200px', background: '#ffffff', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}
           >
             <Dropdown.Header>
               <span className='block text-sm'>@{currentUser.username}</span>
@@ -116,13 +110,31 @@ export default function Header() {
       </div>
       <Navbar.Collapse>
         <Navbar.Link active={path === '/'} as={'div'}>
-          <Link to='/'>Home</Link>
+          <Link to='/' className="text-lg text-black dark:text-white">Home</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === '/about'} as={'div'}>
-          <Link to='/about'>About</Link>
+        <Navbar.Link active={path === '/vision'} as={'div'}>
+          <Link to='/vision' className="text-lg text-black dark:text-white">Vision</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === '/projects'} as={'div'}>
-          <Link to='/projects'>Projects</Link>
+        <Navbar.Link active={path === '/mision'} as={'div'}>
+          <Link to='/mision' className="text-lg text-black dark:text-white">Mision</Link>
+        </Navbar.Link>
+        <Navbar.Link active={path === '/gallery'} as={'div'}>
+          <Link to='/gallery' className="text-lg text-black dark:text-white">Gallery</Link>
+        </Navbar.Link>
+        <Navbar.Link active={path === '/services'} as={'div'}>
+          <Link to='/services' className="text-lg text-black dark:text-white">Services</Link>
+        </Navbar.Link>
+        <Dropdown inline className="text-lg text-black dark:text-white" label="About US">
+        <Dropdown.Item href='/aboutus'>About US</Dropdown.Item>
+          <Dropdown.Item href='/Ourstory'>Our Story</Dropdown.Item>
+          <Dropdown.Item href='/AboutTrust'>About Trust</Dropdown.Item>
+          {/* <Dropdown.Divider />
+          <Dropdown.Item href="#action/3.4">
+            Separated link
+          </Dropdown.Item> */}
+        </Dropdown>
+        <Navbar.Link active={path === '/contacts'} as={'div'}>
+          <Link to='/contacts'  className="text-lg text-black dark:text-white">Contact Us</Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
